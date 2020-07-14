@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import redt.app.util.validate.PhoneNumber;
 
+import javax.validation.Valid;
+
 @Controller
 public class HomeController {
 	@GetMapping("/")
@@ -20,16 +22,18 @@ public class HomeController {
 	}
 
 	@PostMapping("/")
-	public ModelAndView checkValidation(@Validated @ModelAttribute("phonemunber") PhoneNumber phoneNumber, BindingResult bindingResult){
-		ModelAndView modelAndView = new ModelAndView();
+	public String checkValidation (@Valid @ModelAttribute("phonemunber")PhoneNumber phoneNumber, BindingResult bindingResult, Model model){
 		new PhoneNumber().validate(phoneNumber, bindingResult);
-		if (bindingResult.hasFieldErrors()) {
-			modelAndView.addObject("phonemunber", new PhoneNumber());
-			modelAndView.setViewName("index");
-		}else{
-			modelAndView.addObject("phonemunber",phoneNumber);
-			modelAndView.setViewName("result");
+		if (bindingResult.hasFieldErrors()){
+			bindingResult.getAllErrors().forEach(result -> {
+				System.out.println(result.toString());
+			});
+			return "index";
 		}
-		return modelAndView;
+		else {
+			model.addAttribute("phoneNumber", phoneNumber.getNumber());
+			return "result";
+		}
+
 	}
 }
