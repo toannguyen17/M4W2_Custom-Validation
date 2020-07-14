@@ -22,7 +22,7 @@ public class HomeController {
 	}
 
 	@PostMapping("/")
-	public String checkValidation (@Valid @ModelAttribute("phonemunber")PhoneNumber phoneNumber, BindingResult bindingResult, Model model){
+	public String checkValidation (@Valid @ModelAttribute("phonemunber") PhoneNumber phoneNumber, BindingResult bindingResult, Model model){
 		new PhoneNumber().validate(phoneNumber, bindingResult);
 		if (bindingResult.hasFieldErrors()){
 			bindingResult.getAllErrors().forEach(result -> {
