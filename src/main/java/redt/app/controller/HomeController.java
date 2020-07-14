@@ -20,13 +20,14 @@ public class HomeController {
 	}
 
 	@PostMapping("/")
-	public ModelAndView checkValidation(@Validated @ModelAttribute("phonemunber") PhoneNumber phoneNumber, BindingResult bindingResult, Model model){
+	public ModelAndView checkValidation(@Validated @ModelAttribute("phonemunber") PhoneNumber phoneNumber, BindingResult bindingResult){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("phonemunber", new PhoneNumber());
 		new PhoneNumber().validate(phoneNumber, bindingResult);
 		if (bindingResult.hasFieldErrors()) {
+			modelAndView.addObject("phonemunber", new PhoneNumber());
 			modelAndView.setViewName("index");
 		}else{
+			modelAndView.addObject("phonemunber",phoneNumber);
 			modelAndView.setViewName("result");
 		}
 		return modelAndView;
