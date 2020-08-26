@@ -85,6 +85,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasenames("ValidationMessages");
+		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
 }
