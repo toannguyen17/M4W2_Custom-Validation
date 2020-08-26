@@ -4,12 +4,12 @@
 	<title>Input PhoneNumber</title>
 </head>
 <body>
-<form action="#" th:action="@{/}" th:object="${phonemunber}" method="POST">
+<form action="#" th:action="@{/}" th:object="${phone}" method="POST">
 	<table>
 		<tr>
 			<td>PhoneNumber</td>
-			<td><input type="text" name="number" th:field="*{number}"/></td>
-			<td th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Name Error</td>
+			<td><input type="text" name="phone" th:field="*{phone}"/></td>
+			<td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Name Error</td>
 		</tr>
 	</table>
 	<button type="submit">submit</button>
